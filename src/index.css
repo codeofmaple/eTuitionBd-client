@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+.my-container {
+    @apply container mx-auto px-4 lg:px-0;
+}
