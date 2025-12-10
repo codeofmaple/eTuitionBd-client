@@ -52,7 +52,7 @@ const HowItWorks = () => {
     return (
         <section className="py-20 md:py-32 font-inter">
             <motion.div
-                className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+                className="text-center"
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
