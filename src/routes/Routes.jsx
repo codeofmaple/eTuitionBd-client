@@ -1,12 +1,14 @@
 import { createBrowserRouter } from 'react-router'
 import MainLayout from '../layouts/MainLayout'
+import Home from '../pages/Home/Home'
+import Login from '../pages/Login/Login'
+import Register from '../pages/Register/Register'
+import About from '../pages/About/About'
+import Contact from '../pages/Contact/Contact'
+import ErrorPage from '../pages/ErrorPage/ErrorPage'
 import DashboardLayout from '../layouts/DashboardLayout'
-import Home from '../page/Home/Home'
-import Login from '../page/Login/Login'
-import Register from '../page/Register/Register'
-import About from '../page/About/About'
-import Contact from '../page/Contact/Contact'
-import ErrorPage from '../page/ErrorPage/ErrorPage'
+import PrivateRoute from './PrivateRoute'
+import LoadingSpinner from '../components/Shared/LoadingSpinner'
 
 export const router = createBrowserRouter([
     {
@@ -26,27 +28,46 @@ export const router = createBrowserRouter([
                 path: '/contact',
                 element: <Contact />,
             },
+            // {
+            //     path: '/loading',
+            //     element: <LoadingSpinner />,
+            // },
+
             { path: '/login', element: <Login /> },
             { path: '/register', element: <Register /> },
         ],
     },
-
     {
         path: '/dashboard',
         element: (
-            // <PrivateRoute>
-            <DashboardLayout />
-            // </PrivateRoute>
+            <PrivateRoute>
+                <DashboardLayout />
+            </PrivateRoute>
         ),
-        // children: [
-        //     {
-        //         index: true,
-        //         element: (
-        //             <PrivateRoute>
-        //                 <Statistics />
-        //             </PrivateRoute>
-        //         ),
-        //     },
-        // ],
-    },
+        children: [
+            {
+                index: true,
+                element: <h1>Dashboard Home</h1>,
+            },
+        ],
+    }
+
+    // {
+    //     path: '/dashboard',
+    // element: (
+    //     // <PrivateRoute>
+    //     <DashboardLayout />
+    //     // </PrivateRoute>
+    // ),
+    //     // children: [
+    //     //     {
+    //     //         index: true,
+    //     //         element: (
+    //     //             <PrivateRoute>
+    //     //                 <Statistics />
+    //     //             </PrivateRoute>
+    //     //         ),
+    //     //     },
+    //     // ],
+    // },
 ])
