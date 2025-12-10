@@ -1,22 +1,23 @@
 import React from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { useLocation, useNavigate } from 'react-router';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
+import useAxios from '../../hooks/useAxios';
 
 const SocialLogin = () => {
     const { signInWithGoogle } = useAuth();
+    const axios = useAxios();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
 
     const handleGoogleLogin = async () => {
         try {
             const result = await signInWithGoogle();
             const user = result.user;
 
-            // Default role "Student"
             const userInfo = {
                 name: user.displayName,
                 email: user.email,
@@ -25,15 +26,25 @@ const SocialLogin = () => {
                 phone: 'N/A'
             };
 
-            // Save user to MongoDB
-            await axios.post('http://localhost:5000/users', userInfo);
+            // push userInfo to MongoDB. If user exists, ignore error.
+            try {
+                await axios.post('/users', userInfo);
+                toast.success('Registration Successful!');
+            } catch (err) {
+                if (err?.response?.status === 409) {
+                    console.info('User already exists in DB — proceeding with login.');
+                } else {
+                    throw err;
+                }
+            }
 
             toast.success('Login Successful!');
             navigate(from, { replace: true });
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.message || 'Google sign-in failed.');
         }
     };
+
 
     return (
         <div className="pt-4">

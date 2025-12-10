@@ -44,7 +44,7 @@ const Footer = () => {
 
                 <nav>
                     <h6 className="footer-title">Contact Us</h6>
-                    <p className="text-sm">Email: support@etuitionbd.com</p>
+                    <p className="text-sm">Email: nahidali.dev@gmail.com</p>
                     <p className="text-sm">Phone: +8801314441473</p>
                     <p className="text-sm mb-4">Address: Dhaka, Bangladesh</p>
 

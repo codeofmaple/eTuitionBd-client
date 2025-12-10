@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import axios from "axios";
 import toast from "react-hot-toast";
 import SocialLogin from "../../components/Shared/SocialLogin";
 import useAuth from "../../hooks/useAuth";
+import useAxios from "../../hooks/useAxios";
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -13,6 +13,7 @@ const Register = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const axios = useAxios();
 
     const onSubmit = async (data) => {
         setIsSubmitting(true);
@@ -33,7 +34,7 @@ const Register = () => {
             };
 
             // 4. Save to Database
-            const dbResponse = await axios.post("http://localhost:5000/users", userInfo);
+            const dbResponse = await axios.post("/users", userInfo);
 
             if (dbResponse.data.insertedId) {
                 reset();
