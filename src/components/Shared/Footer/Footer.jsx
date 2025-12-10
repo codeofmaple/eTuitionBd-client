@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaFacebookF, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedinIn, FaYoutube, FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import Logo from '../Logo';
 
@@ -19,7 +19,7 @@ const Footer = () => {
         { icon: FaFacebookF, href: "#", label: "Facebook" },
         { icon: FaXTwitter, href: "#", label: "Twitter/X" },
         { icon: FaLinkedinIn, href: "#", label: "LinkedIn" },
-        { icon: FaYoutube, href: "#", label: "YouTube" },
+        { icon: FaGithub, href: "#", label: "GitHub" },
     ];
 
     return (
