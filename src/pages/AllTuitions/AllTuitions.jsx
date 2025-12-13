@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Filter, SortAsc, SortDesc, MapPin, BookOpen, DollarSign, Calendar, GraduationCap, X } from 'lucide-react';
 import useAxios from '../../hooks/useAxios';

@@ -17,7 +17,6 @@ import toast from 'react-hot-toast';
 const Contact = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-    // Mock submission handler
     const onSubmit = (data) => {
         // console.log('Contact Form Submitted:', data);
         toast.success("Thank you for your message! We will get back to you shortly.");
@@ -25,7 +24,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen">
             <div className="container mx-auto px-4 py-16 max-w-7xl">
 
                 {/* Header Section */}

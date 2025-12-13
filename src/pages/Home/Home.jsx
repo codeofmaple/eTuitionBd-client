@@ -3,6 +3,7 @@ import HowItWorks from '../../components/Home/HowItWorks';
 import WhyChooseUs from '../../components/Home/WhyChooseUs';
 import HeroSlider from '../../components/Home/HeroSlider';
 import LatestTuitions from '../../components/Home/LatestTuitions';
+import LatestTutors from '../../components/Home/LatestTutors';
 
 const Home = () => {
     return (
@@ -13,7 +14,10 @@ const Home = () => {
             <section>
                 <LatestTuitions></LatestTuitions>
             </section>
-            <section className=''>
+            <section>
+                <LatestTutors></LatestTutors>
+            </section>
+            <section>
                 <HowItWorks></HowItWorks>
             </section>
             <section>
