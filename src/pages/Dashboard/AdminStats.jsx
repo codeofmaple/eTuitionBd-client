@@ -1,85 +1,139 @@
+import React, { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, AreaChart, Area, } from "recharts";
+import { DollarSign, Users, BookOpen, ShoppingCart, } from "lucide-react";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
+/*  utils  */
+const toNumber = (v) => {
+    const n = Number(v);
+    return Number.isFinite(n) ? n : 0;
+};
+
+/*  card components  */
+const StatCard = ({ title, value, icon: Icon, accent }) => (
+    <div className="flex items-center gap-4 p-6 bg-white border rounded-xl shadow-sm">
+        <div
+            className={`p-4 rounded-xl ${accent} bg-opacity-15`}
+        >
+            <Icon className={`w-7 h-7 ${accent}`} />
+        </div>
+
+        <div>
+            <p className="text-sm text-gray-500">{title}</p>
+            <p className="text-2xl font-bold text-gray-900">{value}</p>
+        </div>
+    </div>
+);
+
+/*  Main component */
 const AdminStats = () => {
     const axiosSecure = useAxiosSecure();
 
-    // Fetch Stats from backend 
-    const { data: stats = {} } = useQuery({
-        queryKey: ['admin-stats'],
+    const {
+        data = {},
+        isLoading,
+        isError,
+    } = useQuery({
+        queryKey: ["admin-stats"],
         queryFn: async () => {
-            const res = await axiosSecure.get('/admin-stats');
+            const res = await axiosSecure.get("/admin-stats");
             return res.data;
-        }
+        },
+        staleTime: 1000 * 60 * 2,
+        refetchOnWindowFocus: false,
     });
 
-    // Prepare data for Chart 
-    const chartData = [
-        { name: 'Total Revenue', value: stats.revenue || 0 },
-        { name: 'Total Tuitions', value: stats.tuitions || 0 },
-        { name: 'Total Users', value: stats.users || 0 },
-        { name: 'Total Orders', value: stats.orders || 0 },
-    ];
+    const stats = useMemo(
+        () => ({
+            revenue: toNumber(data.revenue),
+            users: toNumber(data.users),
+            tuitions: toNumber(data.tuitions),
+            orders: toNumber(data.orders),
+        }),
+        [data]
+    );
 
-    const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+    const chartData = useMemo(
+        () => [
+            { name: "Revenue", value: stats.revenue },
+            { name: "Users", value: stats.users },
+            { name: "Tuitions", value: stats.tuitions },
+            { name: "Orders", value: stats.orders },
+        ],
+        [stats]
+    );
+
+    /*  States */
+    if (isLoading) {
+        return (
+            <LoadingSpinner></LoadingSpinner>
+        );
+    }
+
+    if (isError) {
+        return (
+            <div className="p-8 text-red-600">
+                Failed to load admin statistics.
+            </div>
+        );
+    }
+
 
     return (
-        <div className="w-full p-8">
-            <h2 className="text-3xl font-bold mb-6">Hi, Welcome Back!</h2>
+        <div className="p-8 space-y-10">
+            <h2 className="text-3xl font-bold">Admin Overview</h2>
 
             {/* Stats Cards */}
-            <div className="stats shadow w-full mb-8">
-                <div className="stat">
-                    <div className="stat-figure text-secondary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <div className="stat-title">Revenue</div>
-                    <div className="stat-value">${stats.revenue}</div>
-                </div>
-
-                <div className="stat">
-                    <div className="stat-figure text-secondary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                    </div>
-                    <div className="stat-title">Users</div>
-                    <div className="stat-value">{stats.users}</div>
-                </div>
-
-                <div className="stat">
-                    <div className="stat-figure text-secondary">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-8 h-8 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                    </div>
-                    <div className="stat-title">Tuitions</div>
-                    <div className="stat-value">{stats.tuitions}</div>
-                </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <StatCard
+                    title="Total Revenue"
+                    value={(stats.revenue)}
+                    icon={DollarSign}
+                    accent="text-emerald-600"
+                />
+                <StatCard
+                    title="Total Users"
+                    value={stats.users}
+                    icon={Users}
+                    accent="text-indigo-600"
+                />
+                <StatCard
+                    title="Total Tuitions"
+                    value={stats.tuitions}
+                    icon={BookOpen}
+                    accent="text-orange-600"
+                />
+                <StatCard
+                    title="Total Orders"
+                    value={stats.orders}
+                    icon={ShoppingCart}
+                    accent="text-rose-600"
+                />
             </div>
 
-            {/* Recharts Graph  */}
-            <div className="flex justify-center items-center h-[400px]">
-                <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                        <Pie
-                            data={chartData}
-                            cx="50%"
-                            cy="50%"
-                            labelLine={false}
-                            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                            outerRadius={120}
-                            fill="#8884d8"
-                            dataKey="value"
-                        >
-                            {chartData.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Pie>
-                        <Tooltip />
-                        <Legend />
-                    </PieChart>
-                </ResponsiveContainer>
+            {/* Charts */}
+            <div className="grid grid-cols-1 gap-8">
+                {/* Bar Chart */}
+                <div className="bg-white p-6 rounded-xl border shadow-sm">
+                    <h3 className="text-lg font-semibold mb-4">
+                        Platform Metrics
+                    </h3>
+
+                    <ResponsiveContainer width="100%" height={300}>
+                        <BarChart data={chartData}>
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis dataKey="name" />
+                            <YAxis />
+                            <Tooltip />
+                            <Bar dataKey="value" fill="#6366f1" radius={[6, 6, 0, 0]} />
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
             </div>
         </div>
     );
 };
 
-export default AdminStats;
+export default React.memo(AdminStats);

@@ -9,9 +9,9 @@ import {
 import Swal from 'sweetalert2';
 import useAuth from '../../hooks/useAuth';
 import useRole from '../../hooks/useRole';
-import useAxios from '../../hooks/useAxios';
 import TuitionCard from '../../components/Shared/TuitionCard';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner';
+import useSecureAxios from '../../hooks/useAxiosSecure';
 
 const TuitionDetails = () => {
     const { id } = useParams();
@@ -27,13 +27,13 @@ const TuitionDetails = () => {
         experience: '',
         expectedSalary: ''
     });
-    const axios = useAxios();
+    const axiosSecure = useSecureAxios();
 
     useEffect(() => {
         const fetchTuitionDetails = async () => {
             setLoading(true);
             try {
-                const res = await axios.get(`/tuitions/${id}`);
+                const res = await axiosSecure.get(`/tuitions/${id}`);
                 setTuition(res.data);
                 if (res.data?.salary) {
                     setFormData(prev => ({ ...prev, expectedSalary: res.data.salary }));
@@ -46,7 +46,7 @@ const TuitionDetails = () => {
             setLoading(false);
         };
         fetchTuitionDetails();
-    }, [id, navigate, axios]);
+    }, [id, navigate, axiosSecure]);
 
     const handleApply = async (e) => {
         e.preventDefault();
@@ -74,7 +74,7 @@ const TuitionDetails = () => {
                 studentEmail: tuition.studentEmail
             };
 
-            await axios.post('/applications', applicationData);
+            await axiosSecure.post('/applications', applicationData);
 
             setShowApplyModal(false);
             Swal.fire({

@@ -327,7 +327,7 @@ const AllTuitions = () => {
                 {/* Results Count and Active Filters */}
                 <div className="mb-6">
                     <p className="text-gray-600 mb-2">
-                        Showing <span className="font-semibold">{tuitions.length}</span> of {totalPages * 9} tuition opportunities
+                        Showing <span className="font-semibold">{tuitions.length}</span> tuition opportunities
                     </p>
 
                     {hasActiveFilters && (
@@ -385,7 +385,7 @@ const AllTuitions = () => {
                                 </motion.div>
 
                                 {/* Pagination */}
-                                {totalPages > 1 && (
+                                {totalPages > 0 && (
                                     <div className="flex justify-center items-center mt-12 space-x-2">
                                         <button
                                             onClick={() => handlePageChange(page - 1)}

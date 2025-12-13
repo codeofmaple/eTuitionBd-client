@@ -10,7 +10,7 @@ const ApplicationsModal = ({ tuitionId, onClose }) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    // Fetching Applications for this specific tuition
+    // Fetching Applications for specific tuition
     const { data: applications = [], isLoading } = useQuery({
         queryKey: ['applications', tuitionId],
         queryFn: async () => {

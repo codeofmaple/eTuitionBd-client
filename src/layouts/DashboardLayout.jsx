@@ -22,7 +22,7 @@ const DashboardLayout = () => {
         navigate('/');
     };
 
-    // Show loading spinner while checking role
+
     if (isRoleLoading) {
         return <LoadingSpinner />;
     }
