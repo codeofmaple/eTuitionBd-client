@@ -5,8 +5,8 @@ const Logo = ({ className = "h-16" }) => {
 
     const textStyles = {
         e: "text-emerald-500",
-        tuition: "text-indigo-800 dark:text-indigo-200",
-        bd: "text-emerald-600 dark:text-emerald-400 ml-0.5"
+        tuition: "text-indigo-700 dark:text-indigo-200",
+        bd: "text-emerald-500 dark:text-emerald-400 ml-0.5"
     };
 
     return (

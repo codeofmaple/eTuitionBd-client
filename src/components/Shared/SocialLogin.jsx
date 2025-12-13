@@ -26,13 +26,13 @@ const SocialLogin = () => {
                 phone: 'N/A'
             };
 
-            // push userInfo to MongoDB. If user exists, ignore error.
+            //If user exists, ignore error.
             try {
                 await axios.post('/users', userInfo);
                 toast.success('Registration Successful!');
             } catch (err) {
                 if (err?.response?.status === 409) {
-                    console.info('User already exists in DB — proceeding with login.');
+                    console.info('User already exists in DB - proceeding with login.');
                 } else {
                     throw err;
                 }

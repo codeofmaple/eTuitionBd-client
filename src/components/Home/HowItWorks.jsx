@@ -66,9 +66,9 @@ const HowItWorks = () => {
                 </motion.h3>
 
                 <div className="relative grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
-                    <div className="absolute inset-x-0 top-[2.5rem] hidden md:flex justify-around pointer-events-none">
-                        <div className="flex-1 border-t-2 border-dashed border-indigo-200 mx-10 mt-[-2px]"></div>
-                        <div className="flex-1 border-t-2 border-dashed border-indigo-200 mx-10 mt-[-2px]"></div>
+                    <div className="absolute inset-x-0 top-10 hidden md:flex justify-around pointer-events-none">
+                        <div className="flex-1 border-t-2 border-dashed border-indigo-200 mx-10 -mt-0.5"></div>
+                        <div className="flex-1 border-t-2 border-dashed border-indigo-200 mx-10 -mt-0.5"></div>
                     </div>
 
                     {howItWorksData.map((step, index) => (

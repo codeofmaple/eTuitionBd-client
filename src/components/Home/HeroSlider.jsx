@@ -129,8 +129,8 @@ const HeroSlider = () => {
                 </motion.div>
             </AnimatePresence>
 
-            {/* Content Container - Centered */}
-            <div className="relative z-10 w-full h-full max-w-7xl mx-auto px-6 sm:px-12 flex items-center justify-center pb-24">
+            {/* Content Container  */}
+            <div className="relative mt-2 z-10 w-full h-full max-w-7xl mx-auto px-6 sm:px-12 flex items-center justify-center pb-24">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentIndex}
@@ -140,7 +140,7 @@ const HeroSlider = () => {
                         exit="exit"
                         className="max-w-3xl text-center"
                     >
-                        {/* Icon & Badge - Centered */}
+                        {/* Icon & Badge  */}
                         <motion.div variants={itemVariants} className="flex items-center justify-center gap-2 mb-6">
                             <div className={`p-2 rounded-lg border backdrop-blur-md ${theme.badge}`}>
                                 <currentSlide.icon className="w-5 h-5" />
@@ -154,7 +154,10 @@ const HeroSlider = () => {
                         {/* Headline */}
                         <motion.h1 variants={itemVariants} className="text-5xl sm:text-6xl md:text-7xl font-bold text-white leading-[1.1] mb-6 tracking-tight">
                             {currentSlide.headline}{' '}
-                            <span className={`bg-clip-text text-transparent bg-gradient-to-r ${currentSlide.theme === 'indigo' ? 'from-indigo-400 to-indigo-600' : currentSlide.theme === 'red' ? 'from-red-400 to-red-600' : 'from-emerald-400 to-emerald-600'}`}>
+                            <span className={`bg-clip-text text-transparent bg-gradient-to-r 
+                                ${currentSlide.theme === 'indigo' ? 'from-indigo-500 to-indigo-600' :
+                                    currentSlide.theme === 'red' ? 'from-red-500 to-red-500' :
+                                        'from-emerald-400 to-emerald-600'}`}>
                                 {currentSlide.highlight}
                             </span>
                         </motion.h1>
@@ -164,7 +167,7 @@ const HeroSlider = () => {
                             {currentSlide.description}
                         </motion.p>
 
-                        {/* Buttons - Centered */}
+                        {/* Buttons  */}
                         <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center gap-4">
                             <button className={`flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold transition-all hover:scale-105 active:scale-95 shadow-xl ${theme.button}`}>
                                 Get Started
@@ -178,7 +181,7 @@ const HeroSlider = () => {
                 </AnimatePresence>
             </div>
 
-            {/* Navigation Arrows - Centered vertically */}
+            {/* Navigation Arrows   */}
             <button
                 onClick={prevSlide}
                 className="absolute left-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/20 transition-all backdrop-blur-md"
@@ -195,7 +198,7 @@ const HeroSlider = () => {
                 <ChevronRight className="w-6 h-6" />
             </button>
 
-            {/* Progress Indicator - Bottom center */}
+            {/* Progress Indicator */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
                 {slidesData.map((_, index) => (
                     <button

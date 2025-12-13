@@ -4,9 +4,8 @@ import { motion } from "framer-motion";
 
 const LoadingSpinner = () => {
     return (
-        <div className="w-full h-full flex items-center justify-center p-10 select-none">
+        <div className="w-full h-screen flex items-center justify-center p-10 select-none">
 
-            {/* Outer Glow Ring */}
             <motion.div
                 className="
                     relative w-20 h-20 
@@ -16,16 +15,14 @@ const LoadingSpinner = () => {
                 transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
             >
 
-                {/* Glow ring */}
                 <div
                     className="
                         absolute inset-0 rounded-full 
-                        bg-gradient-to-br from-indigo-400/20 to-emerald-400/20 
+                        bg-linear-to-br from-indigo-400/20 to-emerald-400/20 
                         blur-xl
                     "
                 />
 
-                {/* Rotating dual ring */}
                 <motion.div
                     className="
                         absolute inset-0 rounded-full border-[6px] 

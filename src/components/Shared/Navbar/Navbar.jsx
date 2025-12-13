@@ -4,7 +4,6 @@ import useAuth from '../../../hooks/useAuth';
 import Logo from '../Logo';
 import toast from 'react-hot-toast';
 
-
 const Navbar = () => {
     const { user, logOut } = useAuth();
 
@@ -19,13 +18,16 @@ const Navbar = () => {
         </>
     );
 
-    const handleLogout = () => {
-        logOut()
-            .then(() => {
+    const handleLogout = async (e) => {
+        if (e && typeof e.preventDefault === 'function') e.preventDefault();
+        try {
+            await logOut();
+            setTimeout(() => {
                 toast.success("Logged out successfully");
-            }).catch((error) => {
-                toast.error(error.message);
-            });
+            }, 150);
+        } catch (error) {
+            toast.error(error?.message || "Logout failed");
+        }
     };
 
     return (
@@ -51,7 +53,7 @@ const Navbar = () => {
                             {user ? (
                                 <>
                                     <li><Link to="/dashboard">Dashboard</Link></li>
-                                    <li><a onClick={handleLogout}>Logout</a></li>
+                                    <li><a href="#" onClick={handleLogout}>Logout</a></li>
                                 </>
                             ) : (
                                 <>
@@ -94,12 +96,11 @@ const Navbar = () => {
                                 {/* Profile Dropdown Menu */}
                                 <ul tabIndex={0} className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow">
                                     <li><Link to="/dashboard/profile">Profile Settings</Link></li>
-                                    <li><a onClick={logOut}>Logout</a></li>
+                                    <li><Link to="/" onClick={handleLogout}>Logout</Link></li>
                                 </ul>
                             </div>
                         </div>
                     ) : (
-                        // Logged-out
                         <>
                             <Link to="/login" className="btn btn-ghost">
                                 Login

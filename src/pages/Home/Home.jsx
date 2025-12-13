@@ -2,15 +2,16 @@ import React from 'react';
 import HowItWorks from '../../components/Home/HowItWorks';
 import WhyChooseUs from '../../components/Home/WhyChooseUs';
 import HeroSlider from '../../components/Home/HeroSlider';
+import LatestTuitions from '../../components/Home/LatestTuitions';
 
 const Home = () => {
     return (
         <div>
-            this is home page
-
-
             <section className=''>
                 <HeroSlider></HeroSlider>
+            </section>
+            <section>
+                <LatestTuitions></LatestTuitions>
             </section>
             <section className=''>
                 <HowItWorks></HowItWorks>

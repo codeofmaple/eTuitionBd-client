@@ -48,7 +48,7 @@ const WhyChooseUs = () => {
                         Platform Advantages
                     </h2>
                     <h3 className="text-4xl sm:text-5xl font-extrabold text-gray-900">
-                        The <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-600 to-teal-500">Smart Choice</span> for Tuition
+                        The <span className="text-emerald-500">Smart Choice</span> for Tuition
                     </h3>
                 </motion.div>
 
@@ -68,7 +68,7 @@ const WhyChooseUs = () => {
                                 </div>
                             </div>
                             <h4 className="text-2xl font-bold text-gray-800 mb-3">{feature.title}</h4>
-                            <p className="text-gray-500 flex-grow">{feature.description}</p>
+                            <p className="text-gray-500 grow">{feature.description}</p>
                         </motion.div>
                     ))}
                 </div>
