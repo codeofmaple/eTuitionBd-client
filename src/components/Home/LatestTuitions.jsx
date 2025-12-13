@@ -55,8 +55,8 @@ const LatestTuitions = () => {
     };
 
     return (
-        <section className="py-16">
-            <div className="container mx-auto px-4">
+        <section className="">
+            <div className="">
                 {/* Section Header */}
                 <div className="text-center mb-12">
                     <motion.h2
