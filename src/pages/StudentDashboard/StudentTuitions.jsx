@@ -13,6 +13,7 @@ const StudentTuitions = () => {
     // State for modals
     const [editingTuition, setEditingTuition] = useState(null);
     const [viewingApplicationsId, setViewingApplicationsId] = useState(null);
+    const [status, setStatus] = useState("");
 
     // Fetch tuitions
     const { data: myTuitions = [], isLoading } = useQuery({
@@ -87,7 +88,11 @@ const StudentTuitions = () => {
                                 <td className="text-center">
                                     <button
                                         className="btn btn-sm bg-indigo-100 text-indigo-700 hover:bg-indigo-200 border-none gap-2"
-                                        onClick={() => setViewingApplicationsId(tuition._id)}
+                                        onClick={() => {
+                                            setViewingApplicationsId(tuition._id);
+                                            setStatus(tuition.status);
+                                        }}
+
                                     >
                                         <Users size={16} />
                                         View
@@ -134,6 +139,7 @@ const StudentTuitions = () => {
             {viewingApplicationsId && (
                 <ApplicationsModal
                     tuitionId={viewingApplicationsId}
+                    status={status}
                     onClose={() => setViewingApplicationsId(null)}
                 />
             )}
