@@ -151,26 +151,6 @@ export default function ApplicationsModal({ tuitionId, onClose, status }) {
                                         </div>
                                     </div>
 
-                                    {/* <div className="flex items-center gap-3 justify-end">
-                                        <button
-                                            onClick={() => rejectMutation.mutate(app._id)}
-                                            disabled={app.status === 'rejected' || rejectMutation.isLoading}
-                                            className="inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm border border-red-100 text-red-600 hover:bg-red-50 transition disabled:opacity-60"
-                                            aria-pressed={app.status === 'rejected'}
-                                        >
-                                            <XCircle size={16} />
-                                            <span>{app.status === 'rejected' ? 'Rejected' : 'Reject'}</span>
-                                        </button>
-
-                                        <button
-                                            onClick={() => handleAccept(app)}
-                                            className="inline-flex items-center gap-2 px-3 py-2 rounded-md text-sm bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm transition"
-                                        >
-                                            <Check size={16} />
-                                            <span>Accept</span>
-                                        </button>
-                                    </div> */}
-
                                     <div className="flex items-center gap-3 justify-end">
                                         {status !== 'booked' ? (
                                             <>

@@ -119,7 +119,7 @@ const DashboardLayout = () => {
                                 <li>
                                     <Link to="/dashboard/student/your-tuitions"
                                         className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Your Tuitions">
+                                        data-tip="My Tuitions">
                                         <ClipboardList className='size-4 my-1' />
                                         <span className="is-drawer-close:hidden">My Tuitions</span>
                                     </Link>
