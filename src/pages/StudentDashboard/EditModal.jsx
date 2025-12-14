@@ -93,12 +93,7 @@ const EditModal = ({ tuition, onClose }) => {
                     <input className="input input-bordered w-full" {...register("salary")} type="number" placeholder="Salary" />
                     <input className="input input-bordered w-full" {...register("location")} placeholder="Location" />
                     <textarea className="textarea textarea-bordered w-full" {...register("description")} placeholder="Description" />
-                    <select className="select select-bordered w-full" {...register("status")}>
-                        <option value="">Select status</option>
-                        <option value="pending">pending</option>
-                        <option value="approved">approved</option>
-                        <option value="booked">booked</option>
-                    </select>
+                    <input className="input input-bordered w-full" {...register("status")} readOnly></input>
 
                     <div className="modal-action">
                         <button type="submit" className="btn btn-primary">Save Changes</button>

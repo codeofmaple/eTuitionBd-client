@@ -83,7 +83,7 @@ const StudentTuitions = () => {
                                     </div>
                                 </td>
 
-                                {/* APPLICATIONS COLUMN [cite: 136] */}
+                                {/* APPLICATIONS COLUMN */}
                                 <td className="text-center">
                                     <button
                                         className="btn btn-sm bg-indigo-100 text-indigo-700 hover:bg-indigo-200 border-none gap-2"

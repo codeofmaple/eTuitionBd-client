@@ -24,7 +24,6 @@ import Profile from '../pages/Dashboard/Profile/Profile'
 import AllTutors from '../pages/Tutor/AllTutors'
 import TutorProfile from '../pages/Tutor/TutorProfile'
 import RevenueHistory from '../pages/Dashboard/Tutor/RevenueHistory'
-// import AppliedTutors from '../pages/StudentDashboard/AppliedTutors'
 import StudentRoute from './StudentRoute'
 import TutorRoute from './TutorRoute'
 import DashboardHome from '../pages/Dashboard/DashboardHome'
@@ -94,10 +93,6 @@ export const router = createBrowserRouter([
                         path: 'your-tuitions',
                         element: <StudentTuitions />,
                     },
-                    // {
-                    //     path: 'applied-tutors/:tuitionId',
-                    //     element: <AppliedTutors />,
-                    // },
                     {
                         path: 'payment',
                         element: <Payment />,
