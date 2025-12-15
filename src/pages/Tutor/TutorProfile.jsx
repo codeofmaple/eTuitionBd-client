@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useAxios from '../../hooks/useAxios';
+import LoadingSpinner from '../../components/Shared/LoadingSpinner';
 
 const TutorProfile = () => {
     const { id } = useParams();
@@ -33,12 +34,7 @@ const TutorProfile = () => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center min-h-screen bg-gray-50">
-                <div className="text-center">
-                    <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-gray-600">Loading tutor profile...</p>
-                </div>
-            </div>
+            <LoadingSpinner></LoadingSpinner>
         );
     }
 
@@ -63,7 +59,7 @@ const TutorProfile = () => {
         );
     }
 
-    // Calculate stats from applications
+    // Calculating stats from applications
     const stats = {
         totalApplications: applications?.length || 0,
         approvedApplications: applications?.filter(app => app.status === 'approved').length || 0,
@@ -73,7 +69,7 @@ const TutorProfile = () => {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            {/* Back Navigation */}
+            {/* Back navigation */}
             <div className="bg-white border-b">
                 <div className="container mx-auto px-4 py-4">
                     <Link
@@ -195,7 +191,7 @@ const TutorProfile = () => {
                             </h2>
 
                             <p className="text-gray-600 leading-relaxed mb-8">
-                                {tutor.description || `Experienced ${tutor.subject || 'Mathematics'} tutor with a passion for helping students achieve their academic goals. With years of teaching experience and a student-centered approach, I focus on building strong foundational knowledge while making learning engaging and enjoyable.`}
+                                {tutor.description || `Experienced ${tutor.subject || ''} tutor with a passion for helping students achieve their academic goals. With years of teaching experience and a student-centered approach, I focus on building strong foundational knowledge while making learning engaging and enjoyable.`}
                             </p>
 
                             {/* Expertise */}
@@ -215,19 +211,19 @@ const TutorProfile = () => {
                                 <h3 className="text-xl font-bold text-gray-800 mb-4">Teaching Methodology</h3>
                                 <ul className="space-y-3">
                                     <li className="flex items-start">
-                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 shrink-0" />
                                         <span className="text-gray-600">Concept-based learning with real-world applications</span>
                                     </li>
                                     <li className="flex items-start">
-                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 shrink-0" />
                                         <span className="text-gray-600">Regular assessments and progress tracking</span>
                                     </li>
                                     <li className="flex items-start">
-                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 shrink-0" />
                                         <span className="text-gray-600">Interactive sessions with practical examples</span>
                                     </li>
                                     <li className="flex items-start">
-                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+                                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 mt-0.5 shrink-0" />
                                         <span className="text-gray-600">Personalized lesson plans based on student needs</span>
                                     </li>
                                 </ul>
@@ -291,7 +287,9 @@ const TutorProfile = () => {
                         >
                             <Link
                                 to={`/tuitions`}
-                                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
+                                className="inline-flex items-center justify-center px-8 py-4
+                                 bg-primary text-white font-bold rounded-xl hover:bg-primary-dark 
+                                 transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl"
                             >
                                 <MessageSquare className="w-5 h-5 mr-3" />
                                 View Available Tuitions
