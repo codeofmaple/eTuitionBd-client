@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
@@ -129,7 +129,7 @@ const MyApplications = () => {
 
     return (
         <div className="bg-base-100 min-h-screen">
-            <h2 className="text-3xl font-bold mb-6 text-center text-emerald-600">My Applications</h2>
+            <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">My Applications</h2>
 
             {/* Desktop Table*/}
             <div className="hidden md:block overflow-x-auto rounded-xl border border-base-200 shadow-sm bg-white">
