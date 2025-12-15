@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';

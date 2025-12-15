@@ -1,158 +1,143 @@
-// Profile.jsx
-
-import React, { useEffect } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
+import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
-import { User, Mail, Smartphone, Upload, Briefcase } from 'lucide-react';
+import { User, Mail, Smartphone, Upload } from 'lucide-react';
 import useAuth from '../../../hooks/useAuth';
 import useSecureAxios from '../../../hooks/useAxiosSecure';
+
+const RolePill = ({ role = '' }) => {
+    const map = {
+        student: 'text-green-700 bg-green-100',
+        tutor: 'text-indigo-700 bg-indigo-100',
+        admin: 'text-red-700 bg-red-100',
+    };
+    return (
+        <span className={`px-3 py-1 rounded-full text-xs font-semibold ${map[role] || 'text-gray-600 bg-gray-100'}`}>
+            {role ? role.toUpperCase() : 'USER'}
+        </span>
+    );
+};
 
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
     const axiosSecure = useSecureAxios();
-    const queryClient = useQueryClient();
-    // 1. Fetch user profile data
+    const qc = useQueryClient();
+    const firstRef = useRef(null);
+
     const { data: userData = {}, isLoading } = useQuery({
         queryKey: ['userProfile', user?.email],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/users/${user.email}`);
-            return res.data;
-        },
         enabled: !!user?.email,
-        staleTime: 60000 // Data is relatively static
+        queryFn: async () => (await axiosSecure.get(`/users/${user.email}`)).data,
+        staleTime: 60_000,
     });
 
-    // 2. Initialize form with fetched data
-    const { register, handleSubmit, reset } = useForm();
+    const { register, handleSubmit, reset, formState: { isSubmitting } } = useForm();
 
     useEffect(() => {
         if (userData && userData._id) {
-            // Reset form with fetched data
             reset({
-                name: userData.name || '',
-                photo: userData.photo || user.photoURL || '',
-                phone: userData.phone === 'N/A' ? '' : userData.phone || '', // Clear 'N/A' for editing
+                name: userData.name || user?.displayName || '',
+                photo: userData.photo || user?.photoURL || '',
+                phone: userData.phone && userData.phone !== 'N/A' ? userData.phone : '',
             });
+            setTimeout(() => firstRef.current?.focus?.(), 60);
         }
-    }, [userData, reset, user.photoURL]);
+    }, [userData, reset, user]);
 
-
-    // 3. Mutation for updating profile
-    const updateMutation = useMutation({
-        mutationFn: async (data) => {
-            const id = userData._id;
-            // Send only the fields we want to update
-            return axiosSecure.patch(`/users/${id}`, {
-                name: data.name,
-                photo: data.photo,
-                phone: data.phone
-            });
-        },
+    const upd = useMutation({
+        mutationFn: async (payload) => axiosSecure.patch(`/users/${userData._id}`, payload),
         onSuccess: (res) => {
-            toast.success("Profile updated successfully!");
-            queryClient.invalidateQueries(['userProfile', user?.email]);
-
+            toast.success('Profile updated');
+            qc.invalidateQueries(['userProfile', user?.email]);
             const updatedUser = res?.data?.updatedUser;
-
-            if (updatedUser) {
-                updateUserProfile(updatedUser.name, updatedUser.photo)
-                    .catch(() => { });
-            }
+            if (updatedUser) updateUserProfile(updatedUser.name, updatedUser.photo).catch(() => { });
         },
-        onError: () => {
-            toast.error("Failed to update profile.");
-        }
+        onError: () => toast.error('Update failed'),
     });
 
-    // 4. Handle Form Submission
-    const onSubmit = (data) => {
-        updateMutation.mutate(data);
-    };
+    const onSubmit = (vals) => upd.mutate({ name: vals.name, photo: vals.photo, phone: vals.phone });
 
-    if (isLoading) return <div className="text-center p-10"><span className="loading loading-spinner loading-lg"></span></div>;
-
-    const roleColor = {
-        'student': 'text-green-600 bg-green-100',
-        'tutor': 'text-indigo-600 bg-indigo-100',
-        'admin': 'text-red-600 bg-red-100',
-    };
+    if (isLoading) {
+        return (
+            <div className="p-8 flex items-center justify-center min-h-[60vh]">
+                <span className="loading loading-spinner loading-lg text-indigo-600" />
+            </div>
+        );
+    }
 
     return (
-        <div className="p-8 bg-gray-50 min-h-screen font-sans">
-            <h2 className="text-3xl font-bold text-gray-800 mb-8">
-                {userData.role ? userData.role.charAt(0).toUpperCase() + userData.role.slice(1) : 'User'} Profile Settings
-            </h2>
-
-            <div className="bg-white shadow-xl rounded-2xl p-8 border border-gray-100 max-w-3xl mx-auto">
-
-                {/* Profile Photo and Role Display */}
-                <div className="flex flex-col items-center mb-6 border-b pb-6">
-                    <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-200 shadow-md">
+        <div className="min-h-screen">
+            <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.18 }}
+                className="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg p-6 md:p-8 border border-gray-100"
+            >
+                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-6 mb-6">
+                    <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-100 shadow-sm">
                         <img
-                            src={userData.photo || user.photoURL || 'https://via.placeholder.com/150'}
-                            alt="Profile"
+                            src={userData.photo || user?.photoURL || 'https://i.ibb.co/tM85b03/user-placeholder.png'}
+                            alt="avatar"
                             className="w-full h-full object-cover"
+                            onError={(e) => (e.currentTarget.src = 'https://i.ibb.co/tM85b03/user-placeholder.png')}
                         />
                     </div>
-                    <p className="text-2xl font-semibold mt-4 text-gray-800">{userData.name || user.displayName}</p>
-                    <span className={`px-3 py-1 mt-2 rounded-full text-xs font-semibold uppercase ${roleColor[userData.role] || 'text-gray-500 bg-gray-100'}`}>
-                        {userData.role}
-                    </span>
-                    <p className="text-sm text-gray-500 flex items-center gap-1 mt-2">
-                        <Mail size={14} /> {userData.email}
-                    </p>
+
+                    <div className="flex-1 text-center md:text-left">
+                        <h2 className="text-xl font-bold text-gray-800">{userData.name || user?.displayName || 'Unnamed'}</h2>
+                        <div className="mt-2 flex items-center justify-center md:justify-start gap-3">
+                            <RolePill role={userData.role} />
+                            <div className="text-sm text-gray-500 flex items-center gap-2">
+                                <Mail size={14} /> <span>{userData.email}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
-                    {/* Name Field */}
-                    <label className="form-control w-full">
-                        <div className="label"><span className="label-text flex items-center gap-2"><User size={16} /> Full Name</span></div>
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                    <div>
+                        <label className="text-sm text-gray-600 mb-1 block flex items-center gap-2">
+                            <User size={16} /> Full name
+                        </label>
                         <input
-                            type="text"
-                            {...register("name", { required: true })}
-                            placeholder="Your Name"
+                            {...register('name')}
+                            ref={(e) => {
+                                register('name').ref(e);
+                                firstRef.current = e;
+                            }}
                             className="input input-bordered w-full"
+                            placeholder="Your full name"
                         />
-                    </label>
+                    </div>
 
-                    {/* Photo URL Field */}
-                    <label className="form-control w-full">
-                        <div className="label"><span className="label-text flex items-center gap-2"><Upload size={16} /> Photo URL</span></div>
-                        <input
-                            type="url"
-                            {...register("photo")}
-                            placeholder="Link to your profile picture (optional)"
-                            className="input input-bordered w-full"
-                        />
-                    </label>
+                    <div>
+                        <label className="text-sm text-gray-600 mb-1  flex items-center gap-2">
+                            <Upload size={16} /> Photo URL
+                        </label>
+                        <input {...register('photo')} className="input input-bordered w-full" placeholder="https://..." />
+                    </div>
 
-                    {/* Phone Number Field */}
-                    <label className="form-control w-full">
-                        <div className="label"><span className="label-text flex items-center gap-2"><Smartphone size={16} /> Phone Number</span></div>
-                        <input
-                            type="tel"
-                            {...register("phone")}
-                            placeholder="Phone Number (optional)"
-                            className="input input-bordered w-full"
-                        />
-                    </label>
+                    <div>
+                        <label className="text-sm text-gray-600 mb-1  flex items-center gap-2">
+                            <Smartphone size={16} /> Phone
+                        </label>
+                        <input {...register('phone')} className="input input-bordered w-full" placeholder="+880..." />
+                    </div>
 
-                    {/* Submit Button */}
-                    <button
-                        type="submit"
-                        disabled={updateMutation.isLoading}
-                        className="btn btn-lg w-full bg-indigo-600 hover:bg-indigo-700 text-white border-none mt-8"
-                    >
-                        {updateMutation.isLoading ? (
-                            <span className="loading loading-spinner"></span>
-                        ) : (
-                            "Save Changes"
-                        )}
-                    </button>
+                    <div className="mt-2">
+                        <button
+                            type="submit"
+                            disabled={isSubmitting || upd.isLoading}
+                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition"
+                        >
+                            {upd.isLoading ? <span className="loading loading-spinner" /> : 'Save changes'}
+                        </button>
+                    </div>
                 </form>
-            </div>
+            </motion.div>
         </div>
     );
 };
