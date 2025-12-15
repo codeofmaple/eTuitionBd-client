@@ -86,7 +86,7 @@ const WhyChooseUs = () => {
                     </h2>
                     <h3 className="text-4xl sm:text-5xl font-extrabold text-gray-900">
                         The{" "}
-                        <span className="bg-clip-text text-transparent bg-linear-to-r from-emerald-600 to-teal-500">
+                        <span className="text-emerald-600">
                             Smart Choice
                         </span>{" "}
                         for Tuition

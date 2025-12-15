@@ -42,9 +42,9 @@ const LatestTutors = () => {
                         initial={{ opacity: 0, y: -20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl font-bold text-gray-800 mb-4"
+                        className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4"
                     >
-                        Meet Our Expert Tutors
+                        Meet Our <span className='text-emerald-500'>Expert</span> Tutors
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0 }}

@@ -24,8 +24,9 @@ const RolePill = ({ role = '' }) => {
 const Profile = () => {
     const { user, updateUserProfile } = useAuth();
     const axiosSecure = useSecureAxios();
-    const qc = useQueryClient();
+    const queryClient = useQueryClient();
     const firstRef = useRef(null);
+
 
     const { data: userData = {}, isLoading } = useQuery({
         queryKey: ['userProfile', user?.email],
@@ -51,7 +52,7 @@ const Profile = () => {
         mutationFn: async (payload) => axiosSecure.patch(`/users/${userData._id}`, payload),
         onSuccess: (res) => {
             toast.success('Profile updated');
-            qc.invalidateQueries(['userProfile', user?.email]);
+            queryClient.invalidateQueries(['userProfile', user?.email]);
             const updatedUser = res?.data?.updatedUser;
             if (updatedUser) updateUserProfile(updatedUser.name, updatedUser.photo).catch(() => { });
         },

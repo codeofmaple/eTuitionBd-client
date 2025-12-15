@@ -1,4 +1,3 @@
-// DashboardHome.jsx
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import LoadingSpinner from '../../components/Shared/LoadingSpinner';
@@ -11,7 +10,7 @@ const DashboardHome = () => {
     useEffect(() => {
         if (!isRoleLoading) {
             if (role === 'admin') {
-                navigate('/dashboard/admin/manage-users');
+                navigate('/dashboard/admin/stats');
             } else if (role === 'tutor') {
                 navigate('/dashboard/tutor/my-applications');
             } else if (role === 'student') {

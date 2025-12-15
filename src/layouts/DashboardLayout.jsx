@@ -1,6 +1,6 @@
 import { ClipboardList, LogOut, SquarePlus } from 'lucide-react';
 import React from 'react';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { SiBookmyshow } from "react-icons/si";
 import { FaChartBar, FaGraduationCap, FaUser, FaUsers } from "react-icons/fa";
 import { GiSpellBook } from "react-icons/gi";
@@ -10,6 +10,28 @@ import useRole from '../hooks/useRole';
 import useAuth from '../hooks/useAuth';
 import LoadingSpinner from '../components/Shared/LoadingSpinner';
 import toast, { Toaster } from 'react-hot-toast';
+
+const DashboardNavItem = ({ to, label, IconComponent, tooltip }) => {
+    return (
+        <li>
+            <NavLink
+                to={to}
+                className={({ isActive }) =>
+                    `is-drawer-close:tooltip is-drawer-close:tooltip-right flex
+                 items-center gap-2 px-2 py-1 rounded-md transition-all duration-150
+           ${isActive
+                        ? 'text-emerald-600 font-semibold bg-emerald-50'
+                        : 'text-gray-800 hover:text-emerald-600'}`
+                }
+                data-tip={tooltip}
+                end={false}
+            >
+                {IconComponent ? <IconComponent className="size-4 my-1" /> : null}
+                <span className="is-drawer-close:hidden">{label}</span>
+            </NavLink>
+        </li>
+    );
+};
 
 const DashboardLayout = () => {
     const [role, isRoleLoading] = useRole();
@@ -21,7 +43,6 @@ const DashboardLayout = () => {
         toast.success("Logged out successfully");
         navigate('/');
     };
-
 
     if (isRoleLoading) {
         return <LoadingSpinner />;
@@ -88,19 +109,11 @@ const DashboardLayout = () => {
                     {/* Sidebar content here */}
                     <ul className="menu w-full grow p-2">
                         {/* Common Links - Visible to all roles */}
-                        <li>
-                            <Link to="/" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Homepage">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                                <span className="is-drawer-close:hidden">Homepage</span>
-                            </Link>
-                        </li>
+                        <DashboardNavItem to="/" label="Homepage" IconComponent={() => (
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor" className="my-1.5 inline-block size-4"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                        )} tooltip="Homepage" />
 
-                        <li>
-                            <Link to="/dashboard/profile" className="is-drawer-close:tooltip is-drawer-close:tooltip-right" data-tip="Profile">
-                                <FaUser className='size-4 my-1' />
-                                <span className="is-drawer-close:hidden">Profile Settings</span>
-                            </Link>
-                        </li>
+                        <DashboardNavItem to="/dashboard/profile" label="Profile Settings" IconComponent={FaUser} tooltip="Profile" />
 
                         {/* ================== STUDENT DASHBOARD LINKS ================== */}
                         {role === 'student' && (
@@ -108,30 +121,9 @@ const DashboardLayout = () => {
                                 <li className="menu-title is-drawer-close:hidden mt-4">
                                     <span>Student Dashboard</span>
                                 </li>
-                                <li>
-                                    <Link to="/dashboard/student/add-new-tuition"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Add New Tuition">
-                                        <SquarePlus className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">Post New Tuition</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/dashboard/student/your-tuitions"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="My Tuitions">
-                                        <ClipboardList className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">My Tuitions</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/dashboard/student/payment-history"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Payment History">
-                                        <MdOutlinePayment className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">Payment History</span>
-                                    </Link>
-                                </li>
+                                <DashboardNavItem to="/dashboard/student/add-new-tuition" label="Post New Tuition" IconComponent={SquarePlus} tooltip="Add New Tuition" />
+                                <DashboardNavItem to="/dashboard/student/your-tuitions" label="My Tuitions" IconComponent={ClipboardList} tooltip="My Tuitions" />
+                                <DashboardNavItem to="/dashboard/student/payment-history" label="Payment History" IconComponent={MdOutlinePayment} tooltip="Payment History" />
                             </>
                         )}
 
@@ -141,30 +133,9 @@ const DashboardLayout = () => {
                                 <li className="menu-title is-drawer-close:hidden mt-4">
                                     <span>Tutor Dashboard</span>
                                 </li>
-                                <li>
-                                    <Link to="/dashboard/tutor/my-applications"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="My Applications">
-                                        <SiBookmyshow className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">My Applications</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/dashboard/tutor/ongoing-tuitions"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Ongoing Tuitions">
-                                        <GiSpellBook className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">Ongoing Tuitions</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/dashboard/tutor/revenue-history"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Revenue History">
-                                        <MdOutlinePayment className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">Revenue History</span>
-                                    </Link>
-                                </li>
+                                <DashboardNavItem to="/dashboard/tutor/my-applications" label="My Applications" IconComponent={SiBookmyshow} tooltip="My Applications" />
+                                <DashboardNavItem to="/dashboard/tutor/ongoing-tuitions" label="Ongoing Tuitions" IconComponent={GiSpellBook} tooltip="Ongoing Tuitions" />
+                                <DashboardNavItem to="/dashboard/tutor/revenue-history" label="Revenue History" IconComponent={MdOutlinePayment} tooltip="Revenue History" />
                             </>
                         )}
 
@@ -174,30 +145,9 @@ const DashboardLayout = () => {
                                 <li className="menu-title is-drawer-close:hidden mt-4">
                                     <span>Admin Dashboard</span>
                                 </li>
-                                <li>
-                                    <Link to="/dashboard/admin/manage-users"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Manage Users">
-                                        <FaUsers className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">User Management</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/dashboard/admin/manage-tuitions"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Manage Tuitions">
-                                        <FaGraduationCap className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">Tuition Management</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/dashboard/admin/stats"
-                                        className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                                        data-tip="Statistics">
-                                        <FaChartBar className='size-4 my-1' />
-                                        <span className="is-drawer-close:hidden">Reports & Analytics</span>
-                                    </Link>
-                                </li>
+                                <DashboardNavItem to="/dashboard/admin/manage-users" label="User Management" IconComponent={FaUsers} tooltip="Manage Users" />
+                                <DashboardNavItem to="/dashboard/admin/manage-tuitions" label="Tuition Management" IconComponent={FaGraduationCap} tooltip="Manage Tuitions" />
+                                <DashboardNavItem to="/dashboard/admin/stats" label="Reports & Analytics" IconComponent={FaChartBar} tooltip="Statistics" />
                             </>
                         )}
 
@@ -205,7 +155,7 @@ const DashboardLayout = () => {
                         <li className="mt-auto pt-4 border-t border-base-300">
                             <button
                                 onClick={handleLogout}
-                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-red-600 hover:text-red-700 hover:bg-red-50"
+                                className="is-drawer-close:tooltip is-drawer-close:tooltip-right text-red-600 hover:text-red-700 hover:bg-red-50 px-2 py-1 rounded-md"
                                 data-tip="Logout">
                                 <LogOut className='size-4 my-1' />
                                 <span className="is-drawer-close:hidden">Logout</span>
@@ -214,7 +164,6 @@ const DashboardLayout = () => {
                     </ul>
                 </div>
             </div>
-
 
             <Toaster position="top-right" />
         </div>

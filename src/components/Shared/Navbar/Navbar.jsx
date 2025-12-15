@@ -4,19 +4,34 @@ import useAuth from '../../../hooks/useAuth';
 import Logo from '../Logo';
 import toast from 'react-hot-toast';
 
+const navItems = [
+    { to: '/', label: 'Home', end: true },
+    { to: '/tuitions', label: 'Tuitions' },
+    { to: '/tutors', label: 'Tutors' },
+    { to: '/about', label: 'About' },
+    { to: '/contact', label: 'Contact' },
+];
+
+// active styling
+const NavItem = ({ to, label, end }) => (
+    <li>
+        <NavLink
+            to={to}
+            end={end}
+            className={({ isActive }) =>
+                `px-2 py-1 rounded-md transition-all duration-150 ${isActive
+                    ? 'text-emerald-600 font-semibold underline underline-offset-4 decoration-2'
+                    : 'text-gray-800 hover:text-emerald-600'
+                }`
+            }
+        >
+            {label}
+        </NavLink>
+    </li>
+);
+
 const Navbar = () => {
     const { user, logOut } = useAuth();
-
-    // Navigation Links 
-    const navLinks = (
-        <>
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/tuitions">Tuitions</NavLink></li>
-            <li><NavLink to="/tutors">Tutors</NavLink></li>
-            <li><NavLink to="/about">About</NavLink></li>
-            <li><NavLink to="/contact">Contact</NavLink></li>
-        </>
-    );
 
     const handleLogout = async (e) => {
         if (e && typeof e.preventDefault === 'function') e.preventDefault();
@@ -48,7 +63,10 @@ const Navbar = () => {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-50 mt-3 w-52 p-2 shadow"
                         >
-                            {navLinks}
+                            {navItems.map(item => (
+                                <NavItem key={item.to} to={item.to} label={item.label} end={item.end} />
+                            ))}
+
                             {/* Mobile Auth Links */}
                             {user ? (
                                 <>
@@ -64,7 +82,7 @@ const Navbar = () => {
                         </ul>
                     </div>
 
-                    {/* Logo and Website Name  */}
+                    {/* Logo */}
                     <Link to="/">
                         <Logo />
                     </Link>
@@ -73,11 +91,13 @@ const Navbar = () => {
                 {/* 2. Desktop Links */}
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        {navLinks}
+                        {navItems.map(item => (
+                            <NavItem key={item.to} to={item.to} label={item.label} end={item.end} />
+                        ))}
                     </ul>
                 </div>
 
-                {/* 3. Authentication/Profile */}
+                {/* 3. Profile */}
                 <div className="navbar-end space-x-2">
                     {user ? (
                         // Logged-in: Dashboard
