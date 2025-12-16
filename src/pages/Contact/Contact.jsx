@@ -25,6 +25,7 @@ const Contact = () => {
 
     return (
         <div className="min-h-screen">
+            <title>Contact - eTuitionBd</title>
             <div className="container mx-auto px-4 py-16 max-w-7xl">
 
                 {/* Header Section */}

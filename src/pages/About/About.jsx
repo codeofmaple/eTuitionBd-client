@@ -22,6 +22,7 @@ const FeatureCard = ({ icon: Icon, title, description, delay }) => (
 const About = () => {
     return (
         <div className="min-h-screen  ">
+            <title>About - eTuitionBd</title>
             <div className="container mx-auto px-4 py-16 max-w-7xl">
 
                 {/* Hero Section */}

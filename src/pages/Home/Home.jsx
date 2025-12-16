@@ -8,6 +8,7 @@ import LatestTutors from '../../components/Home/LatestTutors';
 const Home = () => {
     return (
         <div className='space-y-16 lg:space-y-24 mb-16'>
+            <title>Home - eTuitionBd</title>
             <section className=''>
                 <HeroSlider></HeroSlider>
             </section>

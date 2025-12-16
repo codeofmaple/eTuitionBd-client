@@ -62,6 +62,7 @@ const AllTutors = () => {
 
     return (
         <div className="min-h-screen">
+            <title>Tutors - eTuitionBd</title>
             {/* Hero Section */}
             <div className="bg-primary text-white py-16 rounded-b-3xl">
                 <div className="container mx-auto px-4 text-center">

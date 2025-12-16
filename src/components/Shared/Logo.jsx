@@ -27,7 +27,7 @@ const Logo = () => {
 
                 <span className={textStyles.e}>e</span>
                 <span className={textStyles.tuition}>Tuition</span>
-                <span className={textStyles.bd}>Bd</span>
+                <span className={textStyles.bd}>Bd  </span>
 
             </h1>
         </div>
