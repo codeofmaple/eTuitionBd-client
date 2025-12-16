@@ -5,6 +5,8 @@ import Logo from '../Logo';
 import toast from 'react-hot-toast';
 import { IoMdLogIn } from "react-icons/io";
 import { FaAddressBook } from "react-icons/fa";
+import { MdDashboardCustomize } from "react-icons/md";
+
 
 
 const navItems = [
@@ -106,6 +108,7 @@ const Navbar = () => {
                         // Logged-in: Dashboard
                         <div className="flex items-center space-x-2">
                             <Link to="/dashboard" className="btn btn-ghost hidden md:inline-flex">
+                                <MdDashboardCustomize />
                                 Dashboard
                             </Link>
 
