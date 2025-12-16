@@ -112,13 +112,6 @@ const TuitionCard = ({
                     </div>
                 </div>
 
-                {/* Description Preview */}
-                {/* {tuition.description && (
-                    <p className="text-gray-700 mb-6 line-clamp-2">
-                        {tuition.description}
-                    </p>
-                )} */}
-
                 {/* Footer */}
                 <div className="space-y-4">
                     <div className="flex items-center justify-between text-sm text-gray-500">
