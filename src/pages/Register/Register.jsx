@@ -193,7 +193,7 @@ const Register = () => {
                             className={`
                                 w-full py-3.5 rounded-xl bg-indigo-600 text-white font-semibold 
                                 hover:bg-indigo-700 transition-all shadow-md hover:shadow-lg 
-                                active:scale-[0.98] mt-8 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}
+                                active:scale-[0.98] ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}
                             `}
                         >
                             {isSubmitting ? 'Creating Account...' : 'Register'}
