@@ -83,6 +83,7 @@ const AdminStats = () => {
 
     return (
         <div className="space-y-10">
+            <title>Statistics - eTuitionBd</title>
             <h2 className="text-2xl font-semibold">Admin Overview</h2>
 
             {/* Stats Cards */}

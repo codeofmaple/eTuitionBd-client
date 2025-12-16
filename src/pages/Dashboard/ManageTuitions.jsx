@@ -54,6 +54,7 @@ const ManageTuitions = () => {
 
     return (
         <div className=" min-h-screen">
+            <title>Manage Tuitions - eTuitionBd</title>
             <div className="space-y-4">
                 {/* header */}
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">

@@ -79,6 +79,7 @@ const Register = () => {
     return (
         <div className="min-h-screen
          flex items-center justify-center px-4 py-12">
+            <title>Register - eTuitionBd</title>
             <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-12 items-center">
 
                 {/* LEFT — Text Section */}

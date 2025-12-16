@@ -88,6 +88,7 @@ const ManageUsers = () => {
 
     return (
         <div className=" min-h-screen">
+            <title>Manage Users - eTuitionBd</title>
             <div className=" space-y-4">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">

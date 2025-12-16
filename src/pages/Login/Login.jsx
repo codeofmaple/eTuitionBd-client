@@ -59,6 +59,7 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center px-4 py-12">
+            <title>Login - eTuitionBd</title>
 
             {/* Glass Card */}
             <div className="
