@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, AreaChart, Area, } from "recharts";
 import { DollarSign, Users, BookOpen, ShoppingCart, } from "lucide-react";
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 /*  utils  */
@@ -91,7 +92,7 @@ const AdminStats = () => {
                 <StatCard
                     title="Total Revenue"
                     value={(stats.revenue)}
-                    icon={DollarSign}
+                    icon={FaBangladeshiTakaSign}
                     accent="text-emerald-600"
                 />
                 <StatCard

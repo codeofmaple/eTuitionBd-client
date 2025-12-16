@@ -24,7 +24,9 @@ const Footer = () => {
 
     return (
         <>
-            <footer className="footer p-10 bg-base-200 text-base-content border-t border-base-300 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <footer className="footer  p-10 bg-base-200 text-base-content my-container
+             border-t border-base-300 grid grid-cols-1
+              md:grid-cols-2 lg:grid-cols-4 gap-8">
 
                 <aside className="lg:col-span-2">
                     <Logo className="h-10" />
