@@ -58,7 +58,7 @@ const Login = () => {
 
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-indigo-100 via-white to-emerald-100 flex items-center justify-center px-4 py-12">
+        <div className="min-h-screen flex items-center justify-center px-4 py-12">
 
             {/* Glass Card */}
             <div className="

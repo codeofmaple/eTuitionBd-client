@@ -51,7 +51,7 @@ const Navbar = () => {
     };
 
     return (
-        <div className="bg-base-100 shadow-lg sticky top-0 z-50">
+        <div className="bg-green-50 shadow-lg sticky top-0 z-50">
             <div className="my-container navbar">
 
                 {/* 1. Navbar Start */}
@@ -128,11 +128,14 @@ const Navbar = () => {
                         </div>
                     ) : (
                         <>
-                            <Link to="/login" className="btn btn-ghost">
+                            <Link to="/login" className="btn text-gray-800 hover:text-emerald-600 btn-ghost
+                             hover:bg-base-100 
+                            hover:border-base-100
+                            ">
                                 <IoMdLogIn className='mt-0.5 size-4' />
                                 Login
                             </Link>
-                            <Link to="/register" className="btn btn-primary hidden sm:inline-flex">
+                            <Link to="/register" className="btn text-gray-100 btn-primary hidden sm:inline-flex">
                                 <FaAddressBook />
                                 Register
                             </Link>

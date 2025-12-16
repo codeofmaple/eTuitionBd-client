@@ -18,13 +18,13 @@ const Register = () => {
     const onSubmit = async (data) => {
         setIsSubmitting(true);
         try {
-            // 1. Create User in Firebase
+            // Create User
             await createUser(data.email, data.password);
 
-            // 2. Update Profile (Name & Photo)
+            // Update Profile
             await updateUserProfile(data.name, data.photoUrl);
 
-            // 3. Prepare data for MongoDB 
+            // data for MongoDB 
             const userInfo = {
                 name: data.name,
                 email: data.email,
@@ -77,7 +77,8 @@ const Register = () => {
 `;
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-indigo-100 via-white to-emerald-100 flex items-center justify-center px-4 py-12">
+        <div className="min-h-screen
+         flex items-center justify-center px-4 py-12">
             <div className="w-full max-w-5xl grid lg:grid-cols-2 gap-12 items-center">
 
                 {/* LEFT — Text Section */}

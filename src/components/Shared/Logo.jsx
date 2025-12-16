@@ -1,16 +1,16 @@
 import React from "react";
 import { FcGraduationCap } from "react-icons/fc";
 
-const Logo = ({ className = "h-16" }) => {
+const Logo = () => {
 
     const textStyles = {
         e: "text-emerald-500",
-        tuition: "text-indigo-700 dark:text-indigo-200",
+        tuition: "text-indigo-700",
         bd: "text-emerald-500 dark:text-emerald-400 ml-0.5"
     };
 
     return (
-        <div className={`flex items-center select-none gap-2 ${className} group`}>
+        <div className={`flex items-center select-none gap-2 h-16 group`}>
 
             <div className="relative flex items-center h-full">
 
