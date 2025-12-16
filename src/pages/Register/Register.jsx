@@ -53,18 +53,28 @@ const Register = () => {
 
     // Common input class
     const inputClass = `
-        w-full px-4 py-3.5 rounded-xl bg-gray-100/50 
-        border border-gray-300 focus:border-indigo-500 
-        focus:ring-4 focus:ring-indigo-200/40
-        outline-none transition-all peer text-gray-800
-    `;
+  peer w-full px-4 py-4 rounded-xl
+  bg-gray-100/50
+  border border-gray-300
+  focus:border-indigo-500
+  focus:ring-4 focus:ring-indigo-200/40
+  outline-none transition-all
+  text-gray-800
+`;
     // Common label class
     const labelClass = `
-        absolute left-4 top-3 text-gray-500 transition-all bg-white/70 
-        px-1 rounded-md pointer-events-none z-10
-        peer-placeholder-shown:top-3 peer-placeholder-shown:text-base
-        peer-focus:-top-3 peer-focus:text-xs peer-focus:text-indigo-600
-    `;
+  absolute left-3 -top-2.5 px-2
+  text-xs text-indigo-600 font-medium
+  bg-white/90 backdrop-blur-sm
+  transition-all duration-200 ease-out
+  pointer-events-none z-20 rounded
+  peer-placeholder-shown:top-3.5
+  peer-placeholder-shown:text-base
+  peer-placeholder-shown:text-gray-500
+  peer-focus:-top-2.5
+  peer-focus:text-xs
+  peer-focus:text-indigo-600
+`;
 
     return (
         <div className="min-h-screen bg-linear-to-br from-indigo-100 via-white to-emerald-100 flex items-center justify-center px-4 py-12">

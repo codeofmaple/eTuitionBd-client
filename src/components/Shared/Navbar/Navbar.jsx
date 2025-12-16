@@ -3,6 +3,9 @@ import { Link, NavLink } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import Logo from '../Logo';
 import toast from 'react-hot-toast';
+import { IoMdLogIn } from "react-icons/io";
+import { FaAddressBook } from "react-icons/fa";
+
 
 const navItems = [
     { to: '/', label: 'Home', end: true },
@@ -123,9 +126,11 @@ const Navbar = () => {
                     ) : (
                         <>
                             <Link to="/login" className="btn btn-ghost">
+                                <IoMdLogIn className='mt-0.5 size-4' />
                                 Login
                             </Link>
                             <Link to="/register" className="btn btn-primary hidden sm:inline-flex">
+                                <FaAddressBook />
                                 Register
                             </Link>
                         </>
