@@ -40,9 +40,10 @@ const ErrorPage = ({
     return (
         <div className="
             min-h-screen flex items-center justify-center 
-            bg-gradient-to-br from-indigo-50 via-white to-emerald-50 
+            bg-linear-to-br from-indigo-50 via-white to-emerald-50 
             text-gray-900 p-6 overflow-hidden relative
         ">
+            <title>Error Page - eTuitionBd</title>
 
             {/* Soft floating gradient glow */}
             <motion.div
@@ -89,7 +90,7 @@ const ErrorPage = ({
                         }}
                         className="
                             inline-flex items-center justify-center p-5 
-                            rounded-2xl bg-gradient-to-br from-indigo-100 to-emerald-100 
+                            rounded-2xl bg-linear-to-br from-indigo-100 to-emerald-100 
                             shadow-inner shadow-white/40
                         "
                     >
@@ -103,7 +104,7 @@ const ErrorPage = ({
                     className="
                         text-8xl sm:text-[10rem] font-black mb-6 
                         text-transparent bg-clip-text 
-                        bg-gradient-to-r from-indigo-600 to-emerald-600
+                        bg-linear-to-r from-indigo-600 to-emerald-600
                         tracking-tight
                     "
                     style={{
@@ -136,7 +137,7 @@ const ErrorPage = ({
                         onClick={() => navigate('/')}
                         className="
                             px-10 py-3 rounded-full
-                            bg-gradient-to-r from-indigo-600 to-emerald-600 
+                            bg-linear-to-r from-indigo-600 to-emerald-600 
                             text-white text-lg font-semibold
                             shadow-lg shadow-indigo-400/40
                             hover:shadow-xl hover:shadow-emerald-400/50

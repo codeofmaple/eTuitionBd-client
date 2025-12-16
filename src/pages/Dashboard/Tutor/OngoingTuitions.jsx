@@ -19,7 +19,9 @@ const OngoingTuitions = () => {
     });
 
     return (
-        <div className="min-h-">
+        <div className="min-h-screen">
+            <title>Ongoing Tuitions - eTuitionBd</title>
+
             <h2 className="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
                 Ongoing Tuitions
             </h2>

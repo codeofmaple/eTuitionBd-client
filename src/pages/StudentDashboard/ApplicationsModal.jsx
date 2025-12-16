@@ -56,6 +56,7 @@ export default function ApplicationsModal({ tuitionId, onClose, status }) {
             role="dialog"
             onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
         >
+            <title>Applications - eTuitionBd</title>
             <motion.div
                 initial={{ y: 8, scale: 0.995 }}
                 animate={{ y: 0, scale: 1 }}

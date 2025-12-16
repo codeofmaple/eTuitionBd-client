@@ -28,6 +28,7 @@ const RevenueHistory = () => {
 
     return (
         <div className="min-h-screen">
+            <title>Revenue History - eTuitionBd</title>
             <div className="space-y-6">
                 <header className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                     <div>

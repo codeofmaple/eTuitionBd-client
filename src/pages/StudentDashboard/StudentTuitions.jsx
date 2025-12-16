@@ -40,6 +40,7 @@ const StudentTuitions = () => {
 
     return (
         <div className="p-4 sm:p-8 bg-gray-50 min-h-screen">
+            <title>My Posted Tuitions - eTuitionBd</title>
             <div className="flex justify-between items-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800">My Posted Tuitions</h2>
                 <div className="badge badge-primary badge-lg p-4">Total: {myTuitions.length}</div>

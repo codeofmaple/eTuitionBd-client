@@ -129,6 +129,7 @@ const MyApplications = () => {
 
     return (
         <div className="bg-base-100 min-h-screen">
+            <title>My Applications - eTuitionBd</title>
             <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">My Applications</h2>
 
             {/* Desktop Table*/}

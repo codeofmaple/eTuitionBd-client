@@ -109,6 +109,7 @@ const CheckoutForm = ({ bookingInfo }) => {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6">
+            <title>Checkout - eTuitionBd</title>
 
             {/* Card Information */}
             <div className="form-control">
